@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('04FallAgainFallBetterApp')
+angular.module('FallAgainApp')
   .directive('slide', function ($swipe) {
     return {
       restrict: 'A',

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('04FallAgainFallBetterApp')
+angular.module('FallAgainApp')
   .controller('MainCtrl', function ($scope, $swipe) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',

@@ -3,7 +3,7 @@
 describe('Directive: slide', function () {
 
   // load the directive's module
-  beforeEach(module('04FallAgainFallBetterApp'));
+  beforeEach(module('FallAgainApp'));
 
   var element,
     scope;

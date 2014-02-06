@@ -1,5 +1,5 @@
 'use strict';
 
-angular.module('04FallAgainFallBetterApp', [
+angular.module('FallAgainApp', [
   'ngTouch'
 ]);
