@@ -23,9 +23,9 @@ angular.module('FallAgainApp')
       //console.log('test');
       //console.log('e: ' + JSON.stringify(event));
       //console.log('e: ' + JSON.stringify(event.which));
-      console.log('e: ' + down);
+      //console.log('e: ' + down);
       if (down === 1) {
-        console.log('test');
+        //console.log('test');
         var element = document.getElementById('image');
         //console.log(JSON.stringify(element));
         //element.innerHTML='hoho';
