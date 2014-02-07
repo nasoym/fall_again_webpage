@@ -57,8 +57,8 @@ angular.module('FallAgainApp')
         element[0].addEventListener('mousemove', function(eventData) {
             var relativeX = eventData.pageX - element[0].offsetLeft;
             var relativeY = eventData.pageY - element[0].offsetTop;
-            console.log('rel x: ' + relativeX);
-            console.log('rel y: ' + relativeY);
+            //console.log('rel x: ' + relativeX);
+            //console.log('rel y: ' + relativeY);
 
             diffX = relativeX - oldRelativeX;
             diffY = relativeY - oldRelativeY;
