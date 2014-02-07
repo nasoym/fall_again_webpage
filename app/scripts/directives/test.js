@@ -10,6 +10,11 @@ angular.module('FallAgainApp')
         var x = attrs.testX;
         var y = attrs.testY;
         //console.log(' ' + x + y);
+        var scopeWidth = attrs.width;
+        var scopeHeight = attrs.height;
+
+        scope[scopeWidth] = element[0].offsetWidth;
+        scope[scopeHeight] = element[0].offsetHeight;
 
         /*
         console.log('>:' + element[0].offsetLeft);
@@ -17,6 +22,7 @@ angular.module('FallAgainApp')
         console.log('>:' + element[0].offsetHeight);
         console.log('>:' + element[0].offsetWidth);
         */
+
         var down = 0;
         element[0].addEventListener('mousedown', function(eventData) {
           down = 1;
@@ -51,8 +57,8 @@ angular.module('FallAgainApp')
         element[0].addEventListener('mousemove', function(eventData) {
             var relativeX = eventData.pageX - element[0].offsetLeft;
             var relativeY = eventData.pageY - element[0].offsetTop;
-            //console.log('rel x: ' + relativeX);
-            //console.log('rel y: ' + relativeY);
+            console.log('rel x: ' + relativeX);
+            console.log('rel y: ' + relativeY);
 
             diffX = relativeX - oldRelativeX;
             diffY = relativeY - oldRelativeY;
@@ -63,9 +69,11 @@ angular.module('FallAgainApp')
             //scope[x] = relativeX;
             //scope[y] = relativeY;
           if (down === 1) {
-            scope[x] = diffX;
-            scope[y] = diffY;
-            scope.$apply();
+            if ((relativeX>0) && (relativeY>0) ) {
+              scope[x] = diffX;
+              scope[y] = diffY;
+              scope.$apply();
+            }
             //element[0].style.background='#0F0';
           } else {
             //element[0].style.background='#F00';

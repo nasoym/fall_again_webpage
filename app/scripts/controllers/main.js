@@ -13,6 +13,11 @@ angular.module('FallAgainApp')
     $scope.down = 0;
     $scope.event = '';
 
+    $scope.left = 0;
+    $scope.top = 0;
+    $scope.width = 0;
+    $scope.height = 0;
+
     $scope.z = 0;
 
     $scope.say = function(text) {
