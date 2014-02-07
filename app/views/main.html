@@ -1,8 +1,11 @@
-
-<div 
+<!--
   ng-mousedown="say('p-down');down=1;" 
   ng-mouseup="say('p-up');down=0;" 
   ng-mousemove="x=$event.pageX;y=$event.pageY;test($event,down);"
+
+-->
+
+<div 
   style="
     background:lightblue;
     position:absolute;
@@ -17,27 +20,67 @@
     y:{{y}}
   </div>
   <div>
+    z:{{z}}
+  </div>
+  <div>
     down:{{down}}
   </div>
   <div>
     event:{{event}}
   </div>
-    <div id="test">
-    hi
-    </div>
-    <img id="image"
+
+  <div>
+  hi
+  </div>
+
+  <div 
+    test
+    test_x="x"
+    test_y="y"
+    style="
+      border:1px solid;
+      background: #F88;
+      width: 300px;
+      height: 300px;
+      overflow: hidden;
+    "
+  >
+        <!--
+        margin: 0px 0px 0px 200px;
+        top right bottom left
       style="
-        position:absolute;
-        top:0;left:0;
+        margin-left: 0px;
+        margin-top: 0px;
+      "
+        -->
+    <img 
+      setposition
+      test_x="x"
+      test_y="y"
+      style="
         pointer-events: none;
       "
-      src="http://lorempixel.com/200/200/sports" 
+      src="http://lorempixel.com/300/600/nature" 
       alt=""
     />
+  </div>
+
+  <!--
+  <img id="image"
+    style="
+      position:absolute;
+      top:0;left:0;
+      pointer-events: none;
+    "
+    src="http://lorempixel.com/200/200/sports" 
+    alt=""
+  />
+  -->
         transform: translate3d(0,0,0);
 </div>
 
 <!--
+    ng-mousemove="x=$event.clientX;y=$event.clientY;"
 
 <div ng-mousedown="say('down')" style="width:100%;height:100%;background:lightblue;position:absolute;top:0;left:0">
 

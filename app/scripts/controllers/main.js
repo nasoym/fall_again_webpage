@@ -13,6 +13,8 @@ angular.module('FallAgainApp')
     $scope.down = 0;
     $scope.event = '';
 
+    $scope.z = 0;
+
     $scope.say = function(text) {
       console.log(text);
     };
@@ -40,6 +42,17 @@ angular.module('FallAgainApp')
       }
 
     };
+
+
+    /*
+    window.onload = function() {
+      console.log('loaded');
+      var element = document.getElementById('abc');
+      //element.innerHTML = 'hhh';
+      console.log('found element: ' + JSON.stringify(element));
+      //$scope.$apply();
+    };
+    */
 
 
   });
