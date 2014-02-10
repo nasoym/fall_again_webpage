@@ -20,6 +20,7 @@ angular.module('FallAgainApp')
 
         var scopeWidth = attrs.width;
         var scopeHeight = attrs.height;
+        var scopeDown = attrs.testDown;
 
 
         //console.log('slide::: ' + JSON.stringify(scope[slide]));
@@ -35,7 +36,7 @@ angular.module('FallAgainApp')
         //element[0].style.marginTop = top + 'px';
         var top = -element[0].offsetHeight - scope[scopeHeight];
         scope[scopeTop] = top;
-        console.log('top: ' + top);
+        //console.log('top: ' + top);
         element[0].style.marginTop = top + 'px';
         scope.$watch(x, function(newVal, oldVal) {
             //var diff = newVal - oldVal;
@@ -71,6 +72,20 @@ angular.module('FallAgainApp')
             //console.log('setposition:top: ' + top);
             element[0].style.marginTop = top + 'px';
           });
+
+        var timer = setInterval(function() {
+          if (scope[scopeDown] === 1) {
+            //console.log('.');
+          } else {
+            var maxValue = element[0].offsetHeight - scope[scopeHeight];
+            if (top > -maxValue){
+              top -= 2;
+              element[0].style.marginTop = top + 'px';
+            }
+          }
+        }, 10);
+
+
       }
     };
   });

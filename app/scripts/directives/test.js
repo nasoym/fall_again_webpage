@@ -12,6 +12,7 @@ angular.module('FallAgainApp')
         //console.log(' ' + x + y);
         var scopeWidth = attrs.width;
         var scopeHeight = attrs.height;
+        var scopeDown = attrs.testDown;
 
         scope[scopeWidth] = element[0].offsetWidth;
         scope[scopeHeight] = element[0].offsetHeight;
@@ -24,8 +25,10 @@ angular.module('FallAgainApp')
         */
 
         var down = 0;
+        scope[scopeDown] = 0;
         element[0].addEventListener('mousedown', function(eventData) {
           down = 1;
+          scope[scopeDown] = 1;
           /*
           //console.log(' ' + eventData.pageX);
             var relativeX = eventData.pageX - element[0].offsetLeft;
@@ -40,6 +43,7 @@ angular.module('FallAgainApp')
         });
         element[0].addEventListener('mouseup', function(eventData) {
           down = 0;
+          scope[scopeDown] = 0;
         });
         element[0].addEventListener('mouseover', function(eventData) {
           //down = 0;
