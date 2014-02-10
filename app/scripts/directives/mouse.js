@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('FallAgainApp')
-  .directive('test', function () {
+  .directive('mouse', function () {
     return {
       restrict: 'A',
       link: function postLink(scope, element, attrs) {
@@ -61,3 +61,4 @@ angular.module('FallAgainApp')
       }
     };
   });
+

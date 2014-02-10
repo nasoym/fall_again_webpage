@@ -2,9 +2,3 @@ body{
   overflow: hidden;
 }
 
-.box{
-  background: lightblue;
-  position:absolute;
-  height: 400px;
-  width: 400px;
-}
