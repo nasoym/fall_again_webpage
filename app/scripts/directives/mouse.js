@@ -16,15 +16,15 @@ angular.module('FallAgainApp')
         scope[scopeHeight] = element[0].offsetHeight;
         scope[scopeDown] = 0;
 
-        element[0].addEventListener('mousedown', function(eventData) {
+        element[0].addEventListener('mousedown', function() {
           scope[scopeDown] = 1;
         });
-        element[0].addEventListener('mouseup', function(eventData) {
+        element[0].addEventListener('mouseup', function() {
           scope[scopeDown] = 0;
         });
-        element[0].addEventListener('mouseover', function(eventData) {
+        element[0].addEventListener('mouseover', function() {
         });
-        element[0].addEventListener('mouseout', function(eventData) {
+        element[0].addEventListener('mouseout', function() {
         });
 
         var oldRelativeX = 0;

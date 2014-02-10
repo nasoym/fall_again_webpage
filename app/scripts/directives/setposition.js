@@ -40,7 +40,7 @@ angular.module('FallAgainApp')
             element[0].style.marginTop = top + 'px';
           });
 
-        var timer = setInterval(function() {
+        setInterval(function() {
           if (scope[scopeDown] !== 1) {
             var maxValue = element[0].offsetHeight - scope[scopeHeight];
             if (top > -maxValue){
