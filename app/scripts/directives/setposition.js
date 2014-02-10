@@ -5,14 +5,24 @@ angular.module('FallAgainApp')
     return {
       restrict: 'A',
       link: function postLink(scope, element, attrs) {
+        /*
         var x = attrs.testX;
         var y = attrs.testY;
         var scopeLeft = attrs.left;
         var scopeTop = attrs.top;
-
         var scopeWidth = attrs.width;
         var scopeHeight = attrs.height;
         var scopeDown = attrs.testDown;
+        */
+
+        var x = attrs.setpositionX;
+        var y = attrs.setpositionY;
+        var scopeLeft = attrs.setpositionLeft;
+        var scopeTop = attrs.setpositionTop;
+        var scopeWidth = attrs.setpositionViewWidth;
+        var scopeHeight = attrs.setpositionViewHeight;
+        var scopeDown = attrs.setpositionPointerDown;
+
 
 
         var left = parseInt(element[0].style.marginLeft.replace(/px$/,''));

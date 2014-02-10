@@ -6,12 +6,19 @@ angular.module('FallAgainApp')
       restrict: 'A',
       link: function postLink(scope, element, attrs) {
 
+        /*
         var x = attrs.testX;
         var y = attrs.testY;
-
         var scopeWidth = attrs.width;
         var scopeHeight = attrs.height;
         var scopeDown = attrs.testDown;
+        */
+
+        var x = attrs.mouseRelativeX;
+        var y = attrs.mouseRelativeY;
+        var scopeWidth = attrs.mouseViewWidth;
+        var scopeHeight = attrs.mouseViewHeight;
+        var scopeDown = attrs.mouseDown;
 
         scope[scopeWidth] = element[0].offsetWidth;
         scope[scopeHeight] = element[0].offsetHeight;

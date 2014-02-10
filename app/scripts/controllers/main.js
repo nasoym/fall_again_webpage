@@ -7,6 +7,11 @@ angular.module('FallAgainApp')
       'AngularJS',
       'Karma'
     ];
+    $scope.relativeX = 0;
+    $scope.relativeY = 0;
+    $scope.mouseDown = 0;
+    $scope.viewWidth = 0;
+    $scope.viewHeight = 0;
 
     $scope.x = 0;
     $scope.y = 0;
