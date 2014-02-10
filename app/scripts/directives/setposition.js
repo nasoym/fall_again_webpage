@@ -31,8 +31,12 @@ angular.module('FallAgainApp')
         //var top = -300;
         var left = parseInt(element[0].style.marginLeft.replace(/px$/,''));
             //console.log('setposition:left: ' + left);
-        var top = parseInt(element[0].style.marginTop.replace(/px$/,''));
+        //var top = parseInt(element[0].style.marginTop.replace(/px$/,''));
         //element[0].style.marginTop = top + 'px';
+        var top = -element[0].offsetHeight - scope[scopeHeight];
+        scope[scopeTop] = top;
+        console.log('top: ' + top);
+        element[0].style.marginTop = top + 'px';
         scope.$watch(x, function(newVal, oldVal) {
             //var diff = newVal - oldVal;
             //console.log('setposition: ' + diff);
