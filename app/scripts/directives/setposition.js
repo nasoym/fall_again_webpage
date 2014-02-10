@@ -44,11 +44,11 @@ angular.module('FallAgainApp')
           if (scope[scopeDown] !== 1) {
             var maxValue = element[0].offsetHeight - scope[scopeHeight];
             if (top > -maxValue){
-              top -= 2;
+              top -= 5;
               element[0].style.marginTop = top + 'px';
             }
           }
-        }, 10);
+        }, 20);
 
       }
     };
