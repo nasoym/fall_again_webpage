@@ -5,33 +5,19 @@ angular.module('FallAgainApp')
     return {
       restrict: 'A',
       link: function postLink(scope, element, attrs) {
-        /*
-        var x = attrs.testX;
-        var y = attrs.testY;
-        var scopeLeft = attrs.left;
-        var scopeTop = attrs.top;
-        var scopeWidth = attrs.width;
-        var scopeHeight = attrs.height;
-        var scopeDown = attrs.testDown;
-        */
 
-        var x = attrs.setpositionX;
-        var y = attrs.setpositionY;
-        var scopeLeft = attrs.setpositionLeft;
-        var scopeTop = attrs.setpositionTop;
+        var scopeX = attrs.setpositionX;
+        var scopeY = attrs.setpositionY;
         var scopeWidth = attrs.setpositionViewWidth;
         var scopeHeight = attrs.setpositionViewHeight;
         var scopeDown = attrs.setpositionPointerDown;
 
-
-
         var left = parseInt(element[0].style.marginLeft.replace(/px$/,''));
-            //console.log('setposition:left: ' + left);
         //var top = parseInt(element[0].style.marginTop.replace(/px$/,''));
         var top = -element[0].offsetHeight - scope[scopeHeight];
-        scope[scopeTop] = top;
         element[0].style.marginTop = top + 'px';
-        scope.$watch(x, function(newVal, oldVal) {
+
+        scope.$watch(scopeX, function(newVal, oldVal) {
             left += newVal;
             var maxValue = element[0].offsetWidth - scope[scopeWidth];
             if (left < -maxValue ) {
@@ -40,10 +26,9 @@ angular.module('FallAgainApp')
             if (left > 0 ) {
               left = 0;
             }
-            scope[scopeLeft] = left;
             element[0].style.marginLeft = left + 'px';
           });
-        scope.$watch(y, function(newVal, oldVal) {
+        scope.$watch(scopeY, function(newVal, oldVal) {
             top += newVal;
             var maxValue = element[0].offsetHeight - scope[scopeHeight];
             if (top < -maxValue ) {
@@ -52,7 +37,6 @@ angular.module('FallAgainApp')
             if (top > 0 ) {
               top = 0;
             }
-            scope[scopeTop] = top;
             element[0].style.marginTop = top + 'px';
           });
 

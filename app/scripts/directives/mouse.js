@@ -6,38 +6,25 @@ angular.module('FallAgainApp')
       restrict: 'A',
       link: function postLink(scope, element, attrs) {
 
-        /*
-        var x = attrs.testX;
-        var y = attrs.testY;
-        var scopeWidth = attrs.width;
-        var scopeHeight = attrs.height;
-        var scopeDown = attrs.testDown;
-        */
-
-        var x = attrs.mouseRelativeX;
-        var y = attrs.mouseRelativeY;
+        var scopeRelativeX = attrs.mouseRelativeX;
+        var scopeRelativeY = attrs.mouseRelativeY;
         var scopeWidth = attrs.mouseViewWidth;
         var scopeHeight = attrs.mouseViewHeight;
         var scopeDown = attrs.mouseDown;
 
         scope[scopeWidth] = element[0].offsetWidth;
         scope[scopeHeight] = element[0].offsetHeight;
-
-        var down = 0;
         scope[scopeDown] = 0;
+
         element[0].addEventListener('mousedown', function(eventData) {
-          down = 1;
           scope[scopeDown] = 1;
         });
         element[0].addEventListener('mouseup', function(eventData) {
-          down = 0;
           scope[scopeDown] = 0;
         });
         element[0].addEventListener('mouseover', function(eventData) {
-          //down = 0;
         });
         element[0].addEventListener('mouseout', function(eventData) {
-          //down = 0;
         });
 
         var oldRelativeX = 0;
@@ -47,19 +34,16 @@ angular.module('FallAgainApp')
         var diffY = 0;
 
         element[0].addEventListener('mousemove', function(eventData) {
-            var relativeX = eventData.pageX - element[0].offsetLeft;
-            var relativeY = eventData.pageY - element[0].offsetTop;
-
-            diffX = relativeX - oldRelativeX;
-            diffY = relativeY - oldRelativeY;
-
-            oldRelativeX = relativeX;
-            oldRelativeY = relativeY;
-
-          if (down === 1) {
-            if ((relativeX>0) && (relativeY>0) ) {
-              scope[x] = diffX;
-              scope[y] = diffY;
+          var relativeX = eventData.pageX - element[0].offsetLeft;
+          var relativeY = eventData.pageY - element[0].offsetTop;
+          diffX = relativeX - oldRelativeX;
+          diffY = relativeY - oldRelativeY;
+          oldRelativeX = relativeX;
+          oldRelativeY = relativeY;
+          if (scope[scopeDown] === 1) {
+            if ((relativeX>0) && (relativeY>0)) {
+              scope[scopeRelativeX] = diffX;
+              scope[scopeRelativeY] = diffY;
               scope.$apply();
             }
           }
