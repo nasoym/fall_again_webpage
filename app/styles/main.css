@@ -2,3 +2,20 @@ body{
   overflow: hidden;
 }
 
+.stopanimation {
+  animation-play-state: paused;
+  moz-animation-play-state: paused;
+}
+
+.move
+{
+    -moz-animation: move 5s;
+}
+ 
+@-moz-keyframes move
+{
+    to {margin-top: 0px;}
+  }
+  /*
+    to {width: 550px;}
+  */

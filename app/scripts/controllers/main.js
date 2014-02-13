@@ -18,5 +18,14 @@ angular.module('FallAgainApp')
       console.log('host is: ' + urlParameters.host);
     }
 
+    $scope.playanimation = function() {
+      console.log('play animation');
+      $scope.$broadcast('play');
+    };
+    $scope.stopanimation = function() {
+      console.log('stop animation');
+      $scope.$broadcast('stop');
+    };
+
   });
 
