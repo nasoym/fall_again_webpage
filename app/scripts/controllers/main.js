@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('FallAgainApp')
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', function ($scope, $location) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -12,4 +12,11 @@ angular.module('FallAgainApp')
     $scope.mouseDown = 0;
     $scope.viewWidth = 0;
     $scope.viewHeight = 0;
+
+    var urlParameters = $location.search();
+    if (urlParameters.host !== undefined) {
+      console.log('host is: ' + urlParameters.host);
+    }
+
   });
+
