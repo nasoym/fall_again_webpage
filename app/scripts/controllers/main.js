@@ -13,13 +13,12 @@ angular.module('FallAgainApp')
     $scope.viewWidth = 0;
     $scope.viewHeight = 0;
 
-    // possible url: ../index.html#?host=ws:%2F%2Flocalhost:8000
     var urlParameters = $location.search();
     if (urlParameters.host !== undefined) {
       console.log('ws:init:>' + urlParameters.host + '<');
       var ws = new WebSocket(urlParameters.host);
       ws.onopen = function() {
-        console.log('ws:opend');
+        console.log('ws:opend: sending hello');
         ws.send('hello');
       };
       ws.onmessage = function(message) {
