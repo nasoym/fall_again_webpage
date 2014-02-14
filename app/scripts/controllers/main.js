@@ -13,9 +13,18 @@ angular.module('FallAgainApp')
     $scope.viewWidth = 0;
     $scope.viewHeight = 0;
 
+    // possible url: ../index.html#?host=ws:%2F%2Flocalhost:8000
     var urlParameters = $location.search();
     if (urlParameters.host !== undefined) {
-      console.log('host is: ' + urlParameters.host);
+      console.log('ws:init:>' + urlParameters.host + '<');
+      var ws = new WebSocket(urlParameters.host);
+      ws.onopen = function() {
+        console.log('ws:opend');
+        ws.send('hello');
+      };
+      ws.onmessage = function(message) {
+        console.log('message: ' + message.data);
+      };
     }
 
     $scope.playanimation = function() {
