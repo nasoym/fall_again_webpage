@@ -13,18 +13,33 @@ angular.module('FallAgainApp')
     $scope.viewWidth = 0;
     $scope.viewHeight = 0;
 
+    var websocketSendable = false;
+    var ws = null;
     var urlParameters = $location.search();
     if (urlParameters.host !== undefined) {
       console.log('ws:init:>' + urlParameters.host + '<');
-      var ws = new WebSocket(urlParameters.host);
+      ws = new WebSocket(urlParameters.host);
       ws.onopen = function() {
-        console.log('ws:opend: sending hello');
-        ws.send('hello');
+        websocketSendable = true;
+        console.log('websocket connection opend: sending hello');
+        ws.send(JSON.stringify({type:'hello'}));
       };
       ws.onmessage = function(message) {
         console.log('message: ' + message.data);
       };
     }
+
+    $scope.$on('user_touch',function(event, payload) {
+      if (websocketSendable) {
+        ws.send(JSON.stringify({type: 'user_touch', percentage: payload.percentage}));
+      }
+    });
+
+    $scope.$on('image_animation',function(event, payload) {
+      if (websocketSendable) {
+        ws.send(JSON.stringify({type: 'image_animation', percentage: payload.percentage}));
+      }
+    });
 
     $scope.playanimation = function() {
       console.log('play animation');

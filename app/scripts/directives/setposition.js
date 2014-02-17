@@ -38,6 +38,8 @@ angular.module('FallAgainApp')
               top = 0;
             }
             element[0].style.marginTop = top + 'px';
+            var topPercentage = 1 - -top / maxValue;
+            scope.$emit('user_touch', {percentage: topPercentage});
           });
 
         setInterval(function() {
@@ -46,6 +48,8 @@ angular.module('FallAgainApp')
             if (top > -maxValue){
               top -= 5;
               element[0].style.marginTop = top + 'px';
+              var topPercentage = 1 - -top / maxValue;
+              scope.$emit('image_animation', {percentage: topPercentage});
             }
           }
         }, 20);
