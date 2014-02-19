@@ -27,6 +27,8 @@ angular.module('FallAgainApp')
       ws.onmessage = function(message) {
         console.log('message: ' + message.data);
       };
+    } else {
+      console.log('no websocket host is defined');
     }
 
     $scope.$on('user_touch',function(event, payload) {
