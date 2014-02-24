@@ -31,9 +31,25 @@ angular.module('FallAgainApp')
       console.log('no websocket host is defined');
     }
 
+    var touchState = 0;
+
     $scope.$on('user_touch',function(event, payload) {
-      if (websocketSendable) {
-        ws.send(JSON.stringify({type: 'user_touch', percentage: payload.percentage}));
+      if ((touchState === 0) && (payload.percentage > 0.1)) {
+        touchState = 1;
+        console.log('user_touch: ' + payload.percentage);
+        if (websocketSendable) {
+          ws.send(JSON.stringify({type: 'user_touch', percentage: payload.percentage}));
+        }
+      }
+    });
+
+    $scope.$on('user_release',function(event, payload) {
+      if (touchState === 1) {
+        touchState = 0;
+        console.log('user_release: ');
+        if (websocketSendable) {
+          ws.send(JSON.stringify({type: 'user_release'}));
+        }
       }
     });
 
