@@ -12,10 +12,10 @@ angular.module('FallAgainApp')
         var scopeHeight = attrs.setpositionViewHeight;
         var scopeDown = attrs.setpositionPointerDown;
 
-        var left = parseInt(element[0].style.marginLeft.replace(/px$/,''));
-        //var top = parseInt(element[0].style.marginTop.replace(/px$/,''));
+        var left = 0;
         var top = -element[0].offsetHeight - scope[scopeHeight];
-        element[0].style.marginTop = top + 'px';
+
+        element[0].style.transform = 'translate3d(' + left + 'px,' + top + 'px, ' + 0 + 'px)';
 
         scope.$watch(scopeX, function(newVal, oldVal) {
             left += newVal;
@@ -26,7 +26,7 @@ angular.module('FallAgainApp')
             if (left > 0 ) {
               left = 0;
             }
-            element[0].style.marginLeft = left + 'px';
+            element[0].style.transform = 'translate3d(' + left + 'px,' + top + 'px, ' + 0 + 'px)';
           });
         scope.$watch(scopeY, function(newVal, oldVal) {
             top += newVal;
@@ -37,7 +37,7 @@ angular.module('FallAgainApp')
             if (top > 0 ) {
               top = 0;
             }
-            element[0].style.marginTop = top + 'px';
+            element[0].style.transform = 'translate3d(' + left + 'px,' + top + 'px, ' + 0 + 'px)';
             var topPercentage = 1 - -top / maxValue;
             scope.$emit('user_touch', {percentage: topPercentage});
           });
@@ -46,8 +46,22 @@ angular.module('FallAgainApp')
           if (scope[scopeDown] !== 1) {
             var maxValue = element[0].offsetHeight - scope[scopeHeight];
             if (top > -maxValue){
-              top -= 5;
-              element[0].style.marginTop = top + 'px';
+              var distanceToDefault = top - -maxValue;
+              var distanceToAnimate = Math.sqrt(distanceToDefault); 
+              var animationSpeedFactor = 1.25;
+              distanceToAnimate = distanceToAnimate * animationSpeedFactor;
+
+              if ((distanceToAnimate > 0) && (distanceToAnimate < 1)){
+                //distanceToAnimate = 1;
+              }
+              var maxAnimateValue = maxValue * 0.02;
+              if (distanceToAnimate > maxAnimateValue) {
+                //distanceToAnimate = maxAnimateValue;
+              }
+              top -= distanceToAnimate;
+
+              element[0].style.transform = 'translate3d(' + left + 'px,' + top + 'px, ' + 0 + 'px)';
+
               var topPercentage = 1 - -top / maxValue;
               scope.$emit('image_animation', {percentage: topPercentage});
             }
