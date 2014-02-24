@@ -27,11 +27,13 @@ angular.module('FallAgainApp')
         });
         element[0].addEventListener('mouseup', function() {
           scope[scopeDown] = 0;
+          scope.$emit('user_release');
         });
         element[0].addEventListener('mouseover', function() {
         });
         element[0].addEventListener('mouseout', function() {
           scope[scopeDown] = 0;
+          scope.$emit('user_release');
         });
 
 
@@ -43,14 +45,17 @@ angular.module('FallAgainApp')
         });
         element[0].addEventListener('touchend', function(eventData) {
           scope[scopeDown] = 0;
+          scope.$emit('user_release');
         });
         element[0].addEventListener('touchenter', function(eventData) {
         });
         element[0].addEventListener('touchleave', function(eventData) {
           scope[scopeDown] = 0;
+          scope.$emit('user_release');
         });
         element[0].addEventListener('touchcancel', function(eventData) {
           scope[scopeDown] = 0;
+          scope.$emit('user_release');
         });
         element[0].addEventListener('touchmove', function(eventData) {
           // reference first touch point for this event
