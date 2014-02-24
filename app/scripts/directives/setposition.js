@@ -41,8 +41,10 @@ angular.module('FallAgainApp')
             }
             element[0].style.transform = 'translate3d(' + left + 'px,' + top + 'px, ' + 0 + 'px)';
             element[0].style.webkitTransform = 'translate3d(' + left + 'px,' + top + 'px, ' + 0 + 'px)';
-            var topPercentage = 1 - -top / maxValue;
-            scope.$emit('user_touch', {percentage: topPercentage});
+            if (scope[scopeDown] === 1) {
+              var topPercentage = 1 - -top / maxValue;
+              scope.$emit('user_touch', {percentage: topPercentage});
+            }
           });
 
         setInterval(function() {
