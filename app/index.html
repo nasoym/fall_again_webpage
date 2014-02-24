@@ -28,6 +28,9 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
+    <!--
+    <div class="container" ng-include="'views/test.html'" ng-controller="TestCtrl"></div>
+    -->
     <div class="container" ng-include="'views/main.html'" ng-controller="MainCtrl"></div>
 
     <!--[if lt IE 9]>
@@ -45,10 +48,12 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/test.js"></script>
         <script src="scripts/directives/mouse.js"></script>
         <script src="scripts/directives/setposition.js"></script>
         <script src="scripts/directives/disableselection.js"></script>
         <script src="scripts/directives/playanimation.js"></script>
+        <script src="scripts/directives/test.js"></script>
         <!-- endbuild -->
 </body>
 </html>
