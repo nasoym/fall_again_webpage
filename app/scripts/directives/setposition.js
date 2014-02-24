@@ -16,6 +16,7 @@ angular.module('FallAgainApp')
         var top = -element[0].offsetHeight - scope[scopeHeight];
 
         element[0].style.transform = 'translate3d(' + left + 'px,' + top + 'px, ' + 0 + 'px)';
+        element[0].style.webkitTransform = 'translate3d(' + left + 'px,' + top + 'px, ' + 0 + 'px)';
 
         scope.$watch(scopeX, function(newVal, oldVal) {
             left += newVal;
@@ -27,6 +28,7 @@ angular.module('FallAgainApp')
               left = 0;
             }
             element[0].style.transform = 'translate3d(' + left + 'px,' + top + 'px, ' + 0 + 'px)';
+            element[0].style.webkitTransform = 'translate3d(' + left + 'px,' + top + 'px, ' + 0 + 'px)';
           });
         scope.$watch(scopeY, function(newVal, oldVal) {
             top += newVal;
@@ -38,6 +40,7 @@ angular.module('FallAgainApp')
               top = 0;
             }
             element[0].style.transform = 'translate3d(' + left + 'px,' + top + 'px, ' + 0 + 'px)';
+            element[0].style.webkitTransform = 'translate3d(' + left + 'px,' + top + 'px, ' + 0 + 'px)';
             var topPercentage = 1 - -top / maxValue;
             scope.$emit('user_touch', {percentage: topPercentage});
           });
@@ -45,6 +48,7 @@ angular.module('FallAgainApp')
         setInterval(function() {
           if (scope[scopeDown] !== 1) {
             var maxValue = element[0].offsetHeight - scope[scopeHeight];
+
             if (top > -maxValue){
               var distanceToDefault = top - -maxValue;
               var distanceToAnimate = Math.sqrt(distanceToDefault); 
@@ -61,6 +65,7 @@ angular.module('FallAgainApp')
               top -= distanceToAnimate;
 
               element[0].style.transform = 'translate3d(' + left + 'px,' + top + 'px, ' + 0 + 'px)';
+              element[0].style.webkitTransform = 'translate3d(' + left + 'px,' + top + 'px, ' + 0 + 'px)';
 
               var topPercentage = 1 - -top / maxValue;
               scope.$emit('image_animation', {percentage: topPercentage});
