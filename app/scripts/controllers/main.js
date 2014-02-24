@@ -38,7 +38,7 @@ angular.module('FallAgainApp')
         touchState = 1;
         console.log('user_touch: ' + payload.percentage);
         if (websocketSendable) {
-          ws.send(JSON.stringify({type: 'user_touch', percentage: payload.percentage}));
+          ws.send(JSON.stringify({type: 'message', content: 'pressed'}));
         }
       }
     });
@@ -48,7 +48,7 @@ angular.module('FallAgainApp')
         touchState = 0;
         console.log('user_release: ');
         if (websocketSendable) {
-          ws.send(JSON.stringify({type: 'user_release'}));
+          ws.send(JSON.stringify({type: 'message', content: 'released'}));
         }
       }
     });
