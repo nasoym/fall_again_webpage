@@ -19,8 +19,8 @@ angular.module('FallAgainApp')
           }
         },
 
-        reconnectTimeout: 4000,
-        pingInterval: 2000,
+        reconnectTimeout: 15000,
+        pingInterval: 5000,
 
         timeout : null,
         interval : null,
@@ -51,6 +51,7 @@ angular.module('FallAgainApp')
           var wsObject = this;
           this.interval = $interval(function() {
             if (wsObject.opened) {
+              console.log('ping');
               wsObject.send(JSON.stringify({type:'ping'}));
             }
           },this.pingInterval);
@@ -96,7 +97,7 @@ angular.module('FallAgainApp')
             this.ws.onmessage = function(payload) {
               var websocketMessage = JSON.parse(payload.data);
               if ((websocketMessage.type !== undefined) &&(websocketMessage.type === 'pong')){
-                //console.log('pong');
+                console.log('pong');
                 wsObject.refreshTimeout();
                 return;
               }
