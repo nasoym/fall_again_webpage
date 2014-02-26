@@ -13,7 +13,6 @@ angular.module('FallAgainApp')
     $scope.viewWidth = 0;
     $scope.viewHeight = 0;
 
-    var websocketSendable = false;
     var ws = null;
     var urlParameters = $location.search();
     if (urlParameters.host !== undefined) {
@@ -34,9 +33,7 @@ angular.module('FallAgainApp')
       if ((touchState === 0) && (payload.percentage > 0.1)) {
         touchState = 1;
         console.log('user_touch: ' + payload.percentage);
-        if (websocketSendable) {
-          ws.send(JSON.stringify({type: 'message', content: 'pressed'}));
-        }
+        ws.send(JSON.stringify({type: 'message', content: 'pressed'}));
       }
     });
 
@@ -44,16 +41,12 @@ angular.module('FallAgainApp')
       if (touchState === 1) {
         touchState = 0;
         console.log('user_release: ');
-        if (websocketSendable) {
-          ws.send(JSON.stringify({type: 'message', content: 'released'}));
-        }
+        ws.send(JSON.stringify({type: 'message', content: 'released'}));
       }
     });
 
     $scope.$on('image_animation',function(event, payload) {
-      if (websocketSendable) {
-        ws.send(JSON.stringify({type: 'image_animation', percentage: payload.percentage}));
-      }
+      ws.send(JSON.stringify({type: 'image_animation', percentage: payload.percentage}));
     });
 
     $scope.playanimation = function() {
