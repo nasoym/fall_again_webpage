@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('FallAgainApp')
-  .controller('MainCtrl', function ($scope, $location) {
+  .controller('MainCtrl', function ($scope, $location, PingWebsockets) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -18,12 +18,9 @@ angular.module('FallAgainApp')
     var urlParameters = $location.search();
     if (urlParameters.host !== undefined) {
       console.log('ws:init:>' + urlParameters.host + '<');
-      ws = new WebSocket(urlParameters.host);
-      ws.onopen = function() {
-        websocketSendable = true;
-        console.log('websocket connection opend: sending hello');
-        ws.send(JSON.stringify({type:'hello'}));
-      };
+      ws = new PingWebsockets(urlParameters.host);
+      ws.connect();
+      ws.send(JSON.stringify({type:'hello'}));
       ws.onmessage = function(message) {
         console.log('message: ' + message.data);
       };
