@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('FallAgainApp')
-  .factory('PingWebsockets', function() {
+  .factory('PingWebsockets', function($timeout, $interval) {
     return function(host, config) {
       var websocketObject = {
         host : host,
@@ -18,34 +18,93 @@ angular.module('FallAgainApp')
             this.wsMessageQueue.push(message);
           }
         },
-        connect : function() {
-          this.ws = this._createConnection(this.host);
+
+        reconnectTimeout: 4000,
+        pingInterval: 2000,
+
+        timeout : null,
+        interval : null,
+        cancelTimeout : function() {
+          if (this.timeout !== null) {
+            $timeout.cancel(this.timeout);
+            this.timeout = null;
+          }
+        },
+        refreshTimeout : function(timeout) {
+          timeout = timeout || this.pingInterval * 2;
+          this.cancelTimeout();
           var wsObject = this;
-          this.ws.onopen = function(payload) {
-            wsObject.opened = true;
-            if (wsObject.onopen !== undefined) {
-              wsObject.onopen(payload);
+          this.timeout = $timeout(function() {
+            console.log('reached timeout');
+            wsObject.connect();
+          }, timeout);
+        },
+
+        cancelInterval: function() {
+          if (this.interval !== null) {
+            $interval.cancel(this.interval);
+            this.interval = null;
+          }
+        },
+        startInterval: function() {
+          this.cancelInterval();
+          var wsObject = this;
+          this.interval = $interval(function() {
+            if (wsObject.opened) {
+              wsObject.send(JSON.stringify({type:'ping'}));
             }
-            while(wsObject.wsMessageQueue.length > 0) {
-              var message = wsObject.wsMessageQueue.pop();
-              wsObject.ws.send(message);
-            }
-          };
-          this.ws.onclose = function(payload) {
-            if (wsObject.onclose !== undefined) {
-              wsObject.onclose(payload);
-            }
-          };
-          this.ws.onerror = function(payload) {
-            if (wsObject.onerror !== undefined) {
-              wsObject.onerror(payload);
-            }
-          };
-          this.ws.onmessage = function(payload) {
-            if (wsObject.onmessage !== undefined) {
-              wsObject.onmessage(payload);
-            }
-          };
+          },this.pingInterval);
+        },
+
+
+        connect : function() {
+          console.log('connect to: ' + this.host);
+          //if (this.ws === null) {
+            var wsObject = this;
+
+            this.ws = this._createConnection(this.host);
+            
+            this.startInterval();
+            this.refreshTimeout();
+
+            this.ws.onopen = function(payload) {
+              wsObject.opened = true;
+              if (wsObject.onopen !== undefined) {
+                wsObject.onopen(payload);
+              }
+              while(wsObject.wsMessageQueue.length > 0) {
+                var message = wsObject.wsMessageQueue.pop();
+                wsObject.ws.send(message);
+              }
+            };
+            this.ws.onclose = function(payload) {
+              console.log('closed: ' + JSON.stringify(payload));
+              wsObject.cancelInterval();
+              wsObject.refreshTimeout(wsObject.reconnectTimeout);
+              if (wsObject.onclose !== undefined) {
+                wsObject.onclose(payload);
+              }
+            };
+            this.ws.onerror = function(payload) {
+              console.log('error: ' + JSON.stringify(payload));
+              wsObject.cancelInterval();
+              wsObject.refreshTimeout(wsObject.reconnectTimeout);
+              if (wsObject.onerror !== undefined) {
+                wsObject.onerror(payload);
+              }
+            };
+            this.ws.onmessage = function(payload) {
+              var websocketMessage = JSON.parse(payload.data);
+              if ((websocketMessage.type !== undefined) &&(websocketMessage.type === 'pong')){
+                console.log('pong');
+                wsObject.refreshTimeout();
+                return;
+              }
+              if (wsObject.onmessage !== undefined) {
+                wsObject.onmessage(payload);
+              }
+            };
+          //}
         },
       };
       config = config || {};
