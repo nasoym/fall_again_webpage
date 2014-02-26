@@ -96,7 +96,7 @@ angular.module('FallAgainApp')
             this.ws.onmessage = function(payload) {
               var websocketMessage = JSON.parse(payload.data);
               if ((websocketMessage.type !== undefined) &&(websocketMessage.type === 'pong')){
-                console.log('pong');
+                //console.log('pong');
                 wsObject.refreshTimeout();
                 return;
               }
