@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('FallAgainApp')
-  .controller('MainCtrl', function ($scope, $location, PingWebsockets) {
+  .controller('MainCtrl', function ($scope, $location, PingWebsockets, $interval) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -44,6 +44,29 @@ angular.module('FallAgainApp')
         ws.send(JSON.stringify({type: 'message', content: 'released'}));
       }
     });
+
+
+    if (urlParameters.mock !== undefined) {
+      console.log('mocking user actions');
+      $scope.mockTouch = false;
+      $interval(function() {
+        var number = Math.random();
+        if (ws.opened) {
+          if (number < 0.001){
+            console.log('mock is closing the websocket connection!');
+            ws.ws.close();
+          } else if (number < 0.01) {
+            if ($scope.mockTouch) {
+              $scope.mockTouch = false;
+              ws.send(JSON.stringify({type: 'message', content: 'released'}));
+            } else {
+              $scope.mockTouch = true;
+              ws.send(JSON.stringify({type: 'message', content: 'pressed'}));
+            }
+          }
+        }
+      },100);
+    }
 
     $scope.$on('image_animation',function(event, payload) {
       ws.send(JSON.stringify({type: 'image_animation', percentage: payload.percentage}));
