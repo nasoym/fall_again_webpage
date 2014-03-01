@@ -58,7 +58,7 @@ angular.module('FallAgainApp')
             ws.ws.close();
           } else if (number < 0.01) {
           */
-          if (number < 0.0001) {
+          if (number < 0.001) {
             if ($scope.mockTouch) {
               $scope.mockTouch = false;
               ws.send(JSON.stringify({type: 'message', content: 'released'}));
