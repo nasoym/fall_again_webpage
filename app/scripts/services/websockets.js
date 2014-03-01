@@ -80,6 +80,7 @@ angular.module('FallAgainApp')
             };
             this.ws.onclose = function(payload) {
               console.log('closed: ' + JSON.stringify(payload));
+              wsObject.opened = false;
               wsObject.cancelInterval();
               wsObject.refreshTimeout(wsObject.reconnectTimeout);
               if (wsObject.onclose !== undefined) {
@@ -88,6 +89,7 @@ angular.module('FallAgainApp')
             };
             this.ws.onerror = function(payload) {
               console.log('error: ' + JSON.stringify(payload));
+              wsObject.opened = false;
               wsObject.cancelInterval();
               wsObject.refreshTimeout(wsObject.reconnectTimeout);
               if (wsObject.onerror !== undefined) {
