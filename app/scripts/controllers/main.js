@@ -52,10 +52,13 @@ angular.module('FallAgainApp')
       $interval(function() {
         var number = Math.random();
         if (ws.opened) {
+          /*
           if (number < 0.001){
             console.log('mock is closing the websocket connection!');
             ws.ws.close();
           } else if (number < 0.01) {
+          */
+          if (number < 0.0001) {
             if ($scope.mockTouch) {
               $scope.mockTouch = false;
               ws.send(JSON.stringify({type: 'message', content: 'released'}));
