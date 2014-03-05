@@ -71,9 +71,9 @@ angular.module('FallAgainApp')
       },100);
     }
 
-    $scope.$on('image_animation',function(event, payload) {
-      ws.send(JSON.stringify({type: 'image_animation', percentage: payload.percentage}));
-    });
+    //$scope.$on('image_animation',function(event, payload) {
+    //  ws.send(JSON.stringify({type: 'image_animation', percentage: payload.percentage}));
+    //});
 
     $scope.playanimation = function() {
       console.log('play animation');
