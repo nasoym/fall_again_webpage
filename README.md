@@ -13,3 +13,7 @@ the url of the websocket server can be provided as a url parameter:
 
         https://rawgithub.com/nasoym/fall_again_webpage/master/app/index.html#?host=wss:%2F%2Fecho.websocket.org
 
+## issues
+
+* opening chrome browser so that files loaded from file system can access websocket server:
+        open -a "Google Chrome.app" --args --allow-file-access-from-files
