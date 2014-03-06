@@ -38,7 +38,8 @@ angular.module('FallAgainApp')
     var touchState = 0;
 
     $scope.$on('user_touch',function(event, payload) {
-      if ((touchState === 0) && (payload.percentage > 0.1)) {
+      //if ((touchState === 0) && (payload.percentage > 0.1)) {
+      if (touchState === 0) {
         touchState = 1;
         console.log('user_touch: ' + payload.percentage);
         ws.send(JSON.stringify({type: 'message', content: 'pressed'}));
