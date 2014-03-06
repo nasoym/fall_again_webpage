@@ -15,9 +15,17 @@ angular.module('FallAgainApp')
 
     var ws = null;
     var urlParameters = $location.search();
+    var host = null;
+
     if (urlParameters.host !== undefined) {
-      console.log('ws:init:>' + urlParameters.host + '<');
-      ws = new PingWebsockets(urlParameters.host);
+      host = urlParameters.host;
+    } else {
+      host = 'ws://' + window.location.hostname + ':4545';
+    }
+
+    if (host !== null) {
+      console.log('ws:init:>' + host + '<');
+      ws = new PingWebsockets(host);
       ws.connect();
       ws.send(JSON.stringify({type:'hello'}));
       ws.onmessage = function(message) {
